@@ -13,7 +13,11 @@ const ThemesPane = props => {
                     </>
                 )
             })}
-            <div className="pane-nav" onClick={props.handleGameState}>
+            <div className="pane-nav-prev" onClick={props.handleGameStatePrev}>
+                <p>Rules</p>
+            </div>
+ 
+            <div className="pane-nav-next" onClick={props.handleGameStateNext}>
                 <p>Set Teams</p>
             </div>
         </div>

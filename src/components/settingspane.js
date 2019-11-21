@@ -6,6 +6,13 @@ const SettingsPane = props => {
         <div className="settings">
             <h1>Settings</h1>
             <p>Sound</p>
+            <div className="pane-nav-prev" onClick={props.handleGameStatePrev}>
+                <p>Themes</p>
+            </div>
+ 
+            <div className="pane-nav-next" onClick={props.handleGameStateNext}>
+                <p>Play!</p>
+            </div>
         </div>
     )
 }
