@@ -1,5 +1,33 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  padding: 0;
 }
 
+.App {
+  position: absolute;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: yellow;
+}
 
+.wheel-container {
+  position: absolute;
+  width: 100vw;
+  height: 100vw;
+  top: 50vh;
+  left: -50vw;
+  background-color: gray;
+  border-radius: 50%;
+
+}
+
+.wheel-spoke-container {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  left: 50%;
+  top: 50%;
+  border: 3px solid black;
+}
