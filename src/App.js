@@ -26,27 +26,43 @@ function App() {
     setGameState(gameState + 1);
   }
 
+  const decGameState = () => {
+    setGameState(gameState - 1);
+  }
 
   useEffect(() => {
   }, [gameState]);
 
   switch (gameState) {
     case 0: // Home/Intro screen
-      statePane = <HomePane handleGameState={incGameState} />;
+      statePane = <HomePane
+                    handleGameStateNext={incGameState} />;
       break;
     case 1: // Rules
-      statePane = <RulesPane handleGameState={incGameState} />;
+      statePane = <RulesPane
+                    handleGameStatePrev={decGameState}
+                    handleGameStateNext={incGameState} />;
       break;
     case 2: // Theme
-        statePane = <ThemesPane themes={themes} handleThemeUpdate={setTheme} handleGameState={incGameState} />
+        statePane = <ThemesPane
+                      themes={themes}
+                      handleThemeUpdate={setTheme}
+                      handleGameStatePrev={decGameState}
+                      handleGameStateNext={incGameState} />
       break;
-    case 3: // Settings
-        statePane = <SettingsPane handleSound={setSound} handleGameState={incGameState} />
+    case 3: // Teams
+        statePane = <TeamsPane
+                      handleTeamsUpdate={setTeams}
+                      handleGameStatePrev={decGameState}
+                      handleGameStateNext={incGameState} />
       break;
-    case 4: // Teams
-        statePane = <TeamsPane handleTeamsUpdate={setTeams} handleGameState={incGameState} />
-      break;
-    case 5: // Game
+    case 4: // Settings
+      statePane = <SettingsPane
+                    handleSound={setSound}
+                    handleGameStatePrev={decGameState}
+                    handleGameStateNext={incGameState} />
+    break;
+  case 5: // Game
         statePane = <Wheel teams={teams} theme={theme} />
       break;
   }

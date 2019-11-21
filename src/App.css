@@ -70,3 +70,23 @@ body {
   border-top: 50px solid red;
   transform: rotate(45deg);
 }
+
+.pane-nav-prev {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  min-width: 5vw;
+  min-height: 5vh;
+  border: 2px solid black;
+  padding: 10px;
+}
+
+.pane-nav-next {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  min-width: 5vw;
+  min-height: 5vh;
+  border: 2px solid black;
+  padding: 10px;
+}
