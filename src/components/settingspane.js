@@ -4,8 +4,8 @@ const SettingsPane = props => {
 
     return (
         <div className="settings">
-            <h1>Home</h1>
-            <p>Rules</p>
+            <h1>Settings</h1>
+            <p>Sound</p>
         </div>
     )
 }
