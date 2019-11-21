@@ -30,6 +30,15 @@ function App() {
     setGameState(gameState - 1);
   }
 
+  const incTeams = (index) => {
+    //console.log(`index: ${e.target.value}`);
+    console.log(index)
+  }
+
+  const decTeams = () => {
+    
+  }
+
   useEffect(() => {
   }, [gameState]);
 
@@ -50,23 +59,25 @@ function App() {
                       handleGameStatePrev={decGameState}
                       handleGameStateNext={incGameState} />
       break;
-    case 3: // Teams
-        statePane = <TeamsPane
-                      handleTeamsUpdate={setTeams}
-                      handleGameStatePrev={decGameState}
-                      handleGameStateNext={incGameState} />
-      break;
-    case 4: // Settings
+    case 3: // Settings
       statePane = <SettingsPane
                     handleSound={setSound}
                     handleGameStatePrev={decGameState}
                     handleGameStateNext={incGameState} />
-    break;
-  case 5: // Game
-        statePane = <Wheel teams={teams} theme={theme} />
+      break;
+    case 4: // Teams
+        statePane = <TeamsPane
+                      handleTeamsUp={incTeams}
+                      handleTeamsDown={decTeams}
+                      handleGameStatePrev={decGameState}
+                      handleGameStateNext={incGameState} />
+      break;
+    case 5: // Game
+      statePane = <Wheel
+                    teams={teams}
+                    theme={themes[theme]} />
       break;
   }
-
 
   return (
     <div className="App">
@@ -74,6 +85,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

@@ -11,7 +11,7 @@ const SettingsPane = props => {
             </div>
  
             <div className="pane-nav-next" onClick={props.handleGameStateNext}>
-                <p>Play!</p>
+                <p>Set up Teams</p>
             </div>
         </div>
     )
