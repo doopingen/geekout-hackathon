@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     setColors(['#400', '#440', '#040', '#044', '#004']);
-    setCharacters(['Captain Kirk', 'Mr. Spock', 'Scotty', 'Bones'])
+    setCharacters(['Captain Kirk', 'Mr. Spock', 'Scotty', 'Bones', 'Uhuru'])
   }, [])
 
 
