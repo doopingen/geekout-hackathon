@@ -2,19 +2,19 @@ import React from 'react';
 
 const Wheel = props => {
 
-    const numSpokes = props.characters.length;
+    const numSpokes = props.data.TrekData.length;;
     const numColors = props.colors.length;
 
     return (
         <>
             <div className="wheel-container">
-                {   props.characters.map((character, i) => {
+                {   props.data.TrekData.map((character, i) => {
                         const rotation = {transform: `translate(-50%, -50%) rotate(${((360 / numSpokes) * i) + 45}deg)`,
                             backgroundColor: `${props.colors[i % numColors]}`
                         };
                         return (
                             <div key={i} className="wheel-spoke-container" style={rotation}>
-                                <h1>{character}</h1>
+                                <h1>{character.name}</h1>
                             </div>
                         )
                     })

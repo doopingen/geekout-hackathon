@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Wheel from './components/wheel';
+import TrekData from './data/trekkie.json'
+
 
 function App() {
 
   const [colors, setColors] = useState([]);
-  const [characters, setCharacters] = useState([]);
+  const [trek, setTrek] = useState({TrekData})
 
   useEffect(() => {
     setColors(['#400', '#440', '#040', '#044', '#004']);
-    setCharacters(['Captain Kirk', 'Mr. Spock', 'Scotty', 'Bones', 'Uhuru'])
   }, [])
-
 
   return (
     <div className="App">
-      <Wheel colors={colors} characters={characters} />
+      <Wheel data={trek} colors={colors}/>
     </div>
   );
 }
+
 
 export default App;
