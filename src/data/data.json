@@ -1,19 +1,40 @@
-{"franchise": [{
-    "name": "Star Trek",
-    "characters": [{
-        "name": "Mr. Spock",
-        "img_url": ""
-    },
-    {
-        "name": "Captain Kirk",
-        "img_url": ""
-    },
-    {
-        "name": "Bones",
-        "img_url": ""
-    },
-    {
-        "name": "Scotty",
-        "img_url": ""
-    }]
-}]}
+{   "gameStates": [
+        "Home",
+        "Themes",
+        "Settings",
+        "Teams",
+        "Game"
+    ],
+    "franchises": [
+        {
+            "name": "Star Trek",
+            "characters": [{
+                "name": "Mr. Spock",
+                "img_url": ""
+            },
+            {
+                "name": "Captain Kirk",
+                "img_url": ""
+            },
+            {
+                "name": "Bones",
+                "img_url": ""
+            },
+            {
+                "name": "Scotty",
+                "img_url": ""
+            }]
+        },
+        {
+            "name": "Star Wars",
+            "characters": [{
+                "name": "Luke Skywalker",
+                "img_url": ""
+            }, {
+                "name": "Han Solo",
+                "img_url": ""
+            }
+            ]
+        }
+    ]
+}

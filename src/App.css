@@ -17,12 +17,31 @@ body {
   to { transform: rotate(360deg)}
 }
 
-.wheel-container {
+
+@media screen and (min-aspect-ratio: 1/1) {
+  .wheel-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vw;
+    top: 50vh;
+    left: -50vw;  
+  }
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+  .wheel-container {
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    top: 50vh;
+    left: -50vh;  
+  }
+}
+
+.wheel {
   position: absolute;
-  width: 100vw;
-  height: 100vw;
-  top: 50vh;
-  left: -50vw;
+  width: 100%;
+  height: 100%;
   background-color: gray;
   border-radius: 50%;
   animation-name: wheel-spin;
@@ -44,10 +63,10 @@ body {
 
 .marker {
   position: absolute;
-  top: 55vh;
-  left: 25vw;
+  top: 10%;
+  right: 10%;
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
   border-top: 50px solid red;
-  transform: rotate(30deg);
+  transform: rotate(45deg);
 }
