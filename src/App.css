@@ -12,6 +12,11 @@ body {
   background: yellow;
 }
 
+@keyframes wheel-spin {
+  from { transform: rotate(0deg)}
+  to { transform: rotate(360deg)}
+}
+
 .wheel-container {
   position: absolute;
   width: 100vw;
@@ -20,7 +25,11 @@ body {
   left: -50vw;
   background-color: gray;
   border-radius: 50%;
-
+  animation-name: wheel-spin;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  overflow: hidden;
 }
 
 .wheel-spoke-container {
@@ -29,5 +38,16 @@ body {
   height: 100%;
   left: 50%;
   top: 50%;
-  border: 3px solid black;
+  /* border: 3px solid black; */
+  color: white;
+}
+
+.marker {
+  position: absolute;
+  top: 55vh;
+  left: 25vw;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 50px solid red;
+  transform: rotate(30deg);
 }
