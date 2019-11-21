@@ -4,8 +4,11 @@ const HomePane = props => {
 
     return (
         <div className="home">
-            <h1>Home</h1>
-            <p>Rules</p>
+            <h1>Naboo!</h1>
+            <img src="./img/picard.png" alt="" />
+            <div className="pane-nav" onClick={props.handleGameState}>
+                <p>Rules</p>
+            </div>
         </div>
     )
 }
