@@ -2,13 +2,21 @@ import React from 'react';
 
 const ThemesPane = props => {
 
+    const checkForThemeType = (e) => {
+        if(e.target.value === "0") {
+            props.setThemeStarTrek()
+        } else {
+            props.setThemeStarWars()
+        }
+    }
+
     return (
         <div className="themes">
             <h1>Themes</h1>
             {props.themes.map((theme, i) => {
                 return (
                     <>
-                    <input type="radio" name="theme" value={i} />
+                    <input type="radio" name="theme" value={i} onClick={checkForThemeType}/>
                         {theme} <br/>
                     </>
                 )
