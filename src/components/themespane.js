@@ -2,30 +2,27 @@ import React from 'react';
 
 const ThemesPane = props => {
 
-    const checkForThemeType = (e) => {
-        if(e.target.value === "0") {
-            props.setThemeStarTrek()
-        } else {
-            props.setThemeStarWars()
-        }
-    }
+    console.log(`theme: ${props.selectedTheme}`)
 
     return (
         <div className="themes">
-            <h1>Themes</h1>
+            <h1>Choose Theme</h1>
             {props.themes.map((theme, i) => {
                 return (
-                    <>
-                    <input type="radio" name="theme" value={i} onClick={checkForThemeType}/>
+                    <div key={i} className="theme-selection">
+                        { (props.selectedTheme === i) ?
+                            <input id={i} type="radio" name="theme" className="theme-input" value={i} onClick={props.handleChange} checked/>
+                            :
+                            <input id={i} type="radio" name="theme" className="theme-input" value={i} onClick={props.handleChange}/>
+                        }
                         {theme} <br/>
-                    </>
+                    </div>
                 )
             })}
-            <div className="pane-nav-prev" onClick={props.handleGameStateSettings}>
+            <div id="navPrev" className="pane-nav-prev" onClick={props.handleChange}>
                 <p>Settings</p>
-            </div>
- 
-            <div className="pane-nav-next" onClick={props.handleGameStateTeams}>
+            </div> 
+            <div id="navNext" className="pane-nav-next" onClick={props.handleChange}>
                 <p>Select Teams</p>
             </div>
         </div>

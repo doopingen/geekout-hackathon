@@ -23,7 +23,7 @@ function App() {
   const [gameState, setGameState] = useState(0);
   const [teams, setTeams] = useState([]);
   const [teamsCount, setTeamsCount] = useState(2);
-  const [theme, setTheme] = useState('');
+  const [selectedTheme, setSelectedTheme] = useState(0);
   const [soundEffects, setSoundEffects] = useState(false);
   const [language, setLanguage] = useState('English');
   const [timeLimit, setTimeLimit] = useState(60);
@@ -44,41 +44,12 @@ function App() {
     setColors(['#400', '#440', '#040', '#044', '#004']);
   }, [gameState]);
 
-  const handleGameStateHome = () => {
-    setGameState(0);
-  }
-
-  const handleGameStateRules = () => {
-    setGameState(1);
-  }
-  const handleGameStateSettings = () => {
-    setGameState(2);
-  }
   const handleGameStateStart = () => {
     setGameState(5);
-  }
-  const handleGameStateTeams = () => {
-    setGameState(4);
   }
 
   const handleGameStateTheme = () => {
     setGameState(3);
-  }
-
-  const incGameState = () => {
-    setGameState(gameState + 1);
-  }
-
-  const decGameState = () => {
-    setGameState(gameState - 1);
-  }
-
-  const setThemeStarTrek = () => {
-    setTheme(0)
-  }
-
-  const setThemeStarWars = () => {
-    setTheme(1)
   }
 
   const incTeams = (index) => {
@@ -91,18 +62,46 @@ function App() {
     console.log(index)
   }
 
+  const handleHomeChange = (e) => {
+    switch (e.currentTarget.id) {
+      case "buttonRules":
+        setGameState(1);
+        break;
+      case "buttonSettings":
+        setGameState(3);
+        break;
+      case "buttonStart":
+        setGameState(5);
+        break;
+      case "navNext":
+        setGameState(1);
+        break;
+    }
+  }
+
+  const handleRulesChange = (e) => {
+    switch (e.currentTarget.id) {
+      case "navPrev":
+        setGameState(0);
+        break;
+      case "navNext":
+        setGameState(2);
+        break;
+    }
+  }
+
   const handleSettingsChange = (e) => {
-    console.log(`event: ${e.target.id}`);
-    switch (e.target.id) {
+    switch (e.currentTarget.id) {
+      case "navPrev":
+        setGameState(1);
+        break;
+      case "navNext":
+        setGameState(3);
+        break;
       case "settingsSoundEffects":
-      case "soundValue":
-      case "soundCarat":
         setSoundEffects(!soundEffects);
         break;
       case "settingsLanguage":
-      case "languageValue":
-      case "languageCarat":
-        console.log(`language ${e.target.value}`)
         let index = languages.indexOf(language);
         if (index > -1) {
           index++;
@@ -112,13 +111,9 @@ function App() {
         } else {
           index = 0;
         }
-        console.log(`new language: ${languages[index]}`)
         setLanguage(languages[index]);
         break;
       case "settingsTeamsCount":
-      case "teamsValue":
-      case "teamsCarat":
-        console.log(`teams count was ${teamsCount}`)
         if (teamsCount === 3) {
           setTeamsCount(1);
         } else {
@@ -126,8 +121,6 @@ function App() {
         }
         break;
       case "settingsTimeLimit":
-      case "timeLimitValue":
-      case "timeLimitCarat":
         switch (timeLimit) {
           case 60:
             setTimeLimit(90);
@@ -140,35 +133,43 @@ function App() {
             break;
         }
         break;
-        case "settingsRounds":
-            case "roundsValue":
-            case "roundsCarat":
-              switch (rounds) {
-                case 5:
-                  setRounds(10);
-                  break;
-                case 10:
-                  setRounds(15);
-                  break;
-                case 15:
-                  setRounds(5);
-                  break;
-              }
-              break;    }
+      case "settingsRounds":
+        switch (rounds) {
+          case 5:
+            setRounds(10);
+            break;
+          case 10:
+            setRounds(15);
+            break;
+          case 15:
+            setRounds(5);
+            break;
+        }
+        break;
+    }
+  }
+
+  const handleThemeChange = (e) => {
+    console.log(e.currentTarget.id)
+    switch(e.currentTarget.id) {
+      case "navNext":
+        setGameState(4);
+        break;
+      case "navPrev":
+        setGameState(2);
+        break;
+      default: // hopefully a numbered ID
+        setSelectedTheme(e.currentTarget.id);
+        break;
+    }
   }
 
   switch (gameState) {
     case 0: // Home/Intro screen
-      statePane = <HomePane
-                    handleGameStateRules={handleGameStateRules}
-                    handleGameStateSettings={handleGameStateSettings}
-                    handleGameStateStart={handleGameStateStart} />;
+      statePane = <HomePane handleChange={handleHomeChange} />;
       break;
     case 1: // Rules
-      statePane = <RulesPane
-                    handleGameStateHome={handleGameStateHome}
-                    handleGameStateSettings={handleGameStateSettings}
-                     />;
+      statePane = <RulesPane handleChange={handleRulesChange} />;
       break;
     case 2: // Settings
       statePane = <SettingsPane
@@ -182,12 +183,9 @@ function App() {
       break;
     case 3: // Theme
         statePane = <ThemesPane
+                      selectedTheme={selectedTheme}
                       themes={themes}
-                      setThemeStarTrek={setThemeStarTrek}
-                      setThemeStarWars={setThemeStarWars}
-                      handleGameStateTeams={handleGameStateTeams}
-                      handleGameStatePrev={decGameState}
-                      handleGameStateNext={incGameState} />
+                      handleChange={handleThemeChange} />
       break;
     case 4: // Teams
         statePane = <TeamsPane
