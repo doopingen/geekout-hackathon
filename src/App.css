@@ -80,6 +80,14 @@ li {
   transform: rotate(45deg);
 }
 
+.pane-button {
+  display: inline-block;
+  width: 30vw;
+  background: lightgray;
+  border: 1px solid black;
+  padding: 2vh 0;
+}
+
 .pane-nav-prev {
   position: absolute;
   top: 10px;

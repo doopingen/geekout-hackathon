@@ -13,6 +13,8 @@ const themes = GameData.franchises.map((franchise) => {
   return franchise.name;
 })
 
+
+
 function App() {
 
   const [gameState, setGameState] = useState(0);
@@ -21,6 +23,30 @@ function App() {
   const [sound, setSound] = useState(false);
   
   let statePane = <></>;
+
+  useEffect(() => {
+  }, [gameState]);
+
+  const handleGameStateHome = () => {
+    setGameState(0);
+  }
+
+  const handleGameStateRules = () => {
+    setGameState(1);
+  }
+  const handleGameStateSettings = () => {
+    setGameState(2);
+  }
+  const handleGameStateStart = () => {
+    setGameState(5);
+  }
+  const handleGameStateTeams = () => {
+    setGameState(4);
+  }
+
+  const handleGameStateTheme = () => {
+    setGameState(3);
+  }
 
   const incGameState = () => {
     setGameState(gameState + 1);
@@ -39,38 +65,41 @@ function App() {
     
   }
 
-  useEffect(() => {
-  }, [gameState]);
-
   switch (gameState) {
     case 0: // Home/Intro screen
       statePane = <HomePane
-                    handleGameStateNext={incGameState} />;
+                    handleGameStateRules={handleGameStateRules}
+                    handleGameStateSettings={handleGameStateSettings}
+                    handleGameStateStart={handleGameStateStart} />;
       break;
     case 1: // Rules
       statePane = <RulesPane
-                    handleGameStatePrev={decGameState}
-                    handleGameStateNext={incGameState} />;
+                    handleGameStateHome={handleGameStateHome}
+                    handleGameStateSettings={handleGameStateSettings}
+                     />;
       break;
-    case 2: // Theme
+    case 2: // Settings
+      statePane = <SettingsPane
+                    handleSound={setSound}
+                    handleGameStateRules={handleGameStateRules}
+                    handleGameStateTheme={handleGameStateTheme}
+                     />
+      break;
+    case 3: // Theme
         statePane = <ThemesPane
                       themes={themes}
                       handleThemeUpdate={setTheme}
-                      handleGameStatePrev={decGameState}
-                      handleGameStateNext={incGameState} />
-      break;
-    case 3: // Settings
-      statePane = <SettingsPane
-                    handleSound={setSound}
-                    handleGameStatePrev={decGameState}
-                    handleGameStateNext={incGameState} />
+                      handleGameStateSettings={handleGameStateSettings}
+                      handleGameStateTeams={handleGameStateTeams}
+ />
       break;
     case 4: // Teams
         statePane = <TeamsPane
                       handleTeamsUp={incTeams}
                       handleTeamsDown={decTeams}
-                      handleGameStatePrev={decGameState}
-                      handleGameStateNext={incGameState} />
+                      handleGameStateTheme={handleGameStateTheme}
+                      handleGameStateStart={handleGameStateStart}
+ />
       break;
     case 5: // Game
       statePane = <Wheel
