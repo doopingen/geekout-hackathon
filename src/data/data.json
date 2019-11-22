@@ -175,7 +175,12 @@
             {
                 "name": "Scotty",
                 "img_url": ""
-            }]
+            },
+            {
+                "name": "Chekov",
+                "img_url": ""
+            }
+        ]
         },
         {
             "name": "Star Wars",

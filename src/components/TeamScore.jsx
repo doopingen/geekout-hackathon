@@ -5,31 +5,13 @@ const TeamScore = props => {
     return (
             <div className="scoretable">
                 {
-                    props.teams.map((team) => {
-                        if(team.team === 1) {
-                            return(
-                                <div className="gamecard-row">
-                                    <span>{`Team ${props.teamName1}`}</span>
-                                    <span className="gamecard-score">{props.team1Score}</span>
-                                </div>
-                            )
-                        }
-                        if(team.team === 2) {
-                            return(
-                                <div className="gamecard-row">
-                                    <span>{`Team ${props.teamName2}`}</span>
-                                    <span className="gamecard-score">{props.team2Score}</span>
-                                </div>
-                            )
-                        }
-                        if(team.team === 3) {
-                            return(
-                                <div className="gamecard-row">
-                                    <span>{`Team ${props.teamName3}`}</span>
-                                    <span className="gamecard-score">{props.team3Score}</span>
-                                </div>
-                            )
-                        }   
+                    props.teamNames.map((team, i) => {
+                        return(
+                            <div className="gamecard-row">
+                                <span>{props.teamNames[i]}</span>
+                                <span className="gamecard-score">{props.teamScores[i]}</span>
+                            </div>
+                        )
                     })
                 }
             </div>

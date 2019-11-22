@@ -6,21 +6,17 @@ import GameWord from './GameWord';
 import { statement } from '@babel/template';
 
 const Game = (props) => {
-    const [gamePhase, setGamePhase] = useState(0);
+    // props.playState - phase of in-round play
+    // props.currentTeam - who is playing
+    // props.currentRound - which round is it (starting at 1)
+    // props.currentWord - the word selected when
+
+    // playstate 0 - show word, show start timer button
+    // playstate 1 - replace word with solved! button, replace timer button with timer
+    // playstate 2 - if solved, update score. reset start timer button, replace word with spin button
+    // goto playstate 0 until #rounds is reached
+
     const [turnTimerActive, setTurnTimerActive] = useState(0);
-
-    const firstPhase = () => {
-        setGamePhase(1);
-        props.setWheelCss('wheel-spin')
-    }
-
-    const secondPhase = (props) => {
-        setGamePhase(2)
-    }
-
-    useEffect(() => {
-        
-    }, []);
     
     // const spinDelay = setTimeout(() => {
     //     alert('Testing');
@@ -28,21 +24,24 @@ const Game = (props) => {
 
     return (
         <div className="teams">
-            <Wheel trekData={props.trekData} colors={props.colors} wheelcss={props.wheelcss}/>
-
-            <p onClick={props.handleTeamsUp(5)} value="5"></p>
+            <Wheel  gameData={props.gameData}
+                    colors={props.colors}
+                    wheelcss={props.wheelcss}
+                    playState={props.playState}
+            />
+            <h1>{props.teamNames[props.currentTeam]}</h1>
+            <h2>Round {props.currentRound}</h2>
+            <p>Score {props.teamScores[props.currentTeam]}</p>
+            <GameTimer playState={props.playState} turnTime={props.turnTime} handleChange={props.handleChange} />
+            <GameWord playState={props.playState} currentWord={props.currentWord} handleChange={props.handleChange} />
+            {/* <p onClick={props.handleChange} value="5"></p>
             <div className="pane-game-left">
             </div>
             <div className="pane-game-right" >
                 <div className="teamscore">
                     <TeamScore 
-                        teams={props.teams}
-                        teamName1={props.teamName1}
-                        teamName2={props.teamName2}
-                        TeamName3={props.teamName3}
-                        team1Score={props.team1Score}
-                        team2Score={props.team2Score}
-                        team3Score={props.team3Score}            
+                        teamNames={props.teamNames}
+                        teamScores={props.teamScores}
                     />
                 </div>
                 <div className="wordarea">  
@@ -52,13 +51,6 @@ const Game = (props) => {
                         <p>Word123435</p>
                     )}
                 </div>
-                <div className="timer">
-                    {gamePhase === 2 ? (
-                        <GameTimer />
-                            ) : (
-                        <p>Timer area..</p>
-                    )}
-                </div>
                 <div className="spinstart">
                     {gamePhase === 0 ? (
                         <button className="green-btn" onClick={firstPhase}>Spin</button>
@@ -66,7 +58,7 @@ const Game = (props) => {
                         <button className="green-btn" onClick={secondPhase}>Start Timer</button>
                     )}
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

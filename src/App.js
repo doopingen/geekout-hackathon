@@ -7,13 +7,12 @@ import SettingsPane from './components/settingspane';
 import TeamsPane from './components/teamspane';
 import GamePane from './components/GamePane';
 import GameData from './data/data.json'
+import { SSL_OP_NO_TICKET } from 'constants';
 
-const gameStates = GameData.gameStates;
 const languages = ['English', 'Klingon', 'Esperanto', 'Marain'];
 const themes = GameData.franchises.map((franchise) => {
   return franchise.name;
 })
-const trekTheme = GameData.franchises[0]
 const wordData = GameData.gameWords
 
 
@@ -21,6 +20,12 @@ const wordData = GameData.gameWords
 function App() {
 
   const [gameState, setGameState] = useState(0);
+  const [playState, setPlayState] = useState(0);
+  const [currentTeam, setCurrentTeam] = useState(0);
+  const [currentRound, setCurrentRound] = useState(1);
+  const [currentWord, setCurrentWord] = useState('');
+  const [currentPersona, setCurrentPersona] = useState(0);
+  const [turnTime, setTurnTime] = useState(0);
   const [teamNames, setTeamNames] = useState(['Team 1','Team 2','Team 3']);
   const [teamScores, setTeamScores] = useState([0,0,0]);
   const [teamsCount, setTeamsCount] = useState(2);
@@ -31,31 +36,15 @@ function App() {
   const [rounds, setRounds] = useState(5);
   const [words, setWords] = useState({wordData})
   const [colors, setColors] = useState()
-  const [wheelcss, setWheelCss] = useState('wheel')
-  
+  const [wheelcss, setWheelCss] = useState('wheel-spin-slow')
+  const [timer, setTimer] = useState();
+
   let statePane = <></>;
 
   useEffect(() => {
     setColors(['#400', '#440', '#040', '#044', '#004']);
+    setCurrentWord(words.wordData[Math.floor((Math.random() * 100))])
   }, [gameState]);
-
-  const handleGameStateStart = () => {
-    setGameState(5);
-  }
-
-  const handleGameStateTheme = () => {
-    setGameState(3);
-  }
-
-  const incTeams = (index) => {
-    //console.log(`index: ${e.target.value}`);
-    console.log(index)
-  }
-
-  const decTeams = (index) => {
-    //console.log(`index: ${e.target.value}`);
-    console.log(index)
-  }
 
   const handleHomeChange = (e) => {
     switch (e.currentTarget.id) {
@@ -63,7 +52,7 @@ function App() {
         setGameState(1);
         break;
       case "buttonSettings":
-        setGameState(3);
+        setGameState(2);
         break;
       case "buttonStart":
         setGameState(5);
@@ -181,6 +170,50 @@ function App() {
     }
   }
 
+  const tick = () => {
+    if (turnTime === 0) {
+      stopGame();
+    } else {
+      console.log(`tick, ${turnTime}`)
+      setTurnTime(turnTime - 1);
+    }
+  }
+
+  const stopGame = () => {
+    clearInterval(timer);
+  } 
+    
+  const handlePlayChange = (e) => {
+    // Handles update to play state and keeps track of round, etc.
+    console.log(`target: ${e.currentTarget.id}`);
+    console.log(`playState, ${playState}`)
+    switch(e.currentTarget.id) {
+      case "phase0":
+        setCurrentPersona(Math.floor(Math.random(GameData.franchises[selectedTheme].characters.length)));
+        setPlayState(1);
+        setTurnTime(60);
+        setTimer(setInterval(() => {
+          tick();
+        }, 1000))
+        break;
+      case "phase1":
+        let t = [...teamScores];
+        t[currentTeam]++;
+        setTeamScores(t);
+        stopGame();
+        break;
+      case "phase2":
+      default:
+        setCurrentWord(words.wordData[Math.floor((Math.random() * 100))]);
+
+        break;
+    }
+  }
+
+  console.log(`GAME DATA`);
+  console.log(`  selected theme: ${selectedTheme}`);
+  console.log(`  data: ${JSON.stringify(GameData.franchises)}`);
+
   switch (gameState) {
     case 0: // Home/Intro screen
       statePane = <HomePane handleChange={handleHomeChange} />;
@@ -213,15 +246,22 @@ function App() {
       break;
     case 5: // Game
         statePane = <GamePane
+        currentTeam={currentTeam}
+        currentRound={currentRound}
+        playState={playState}
+        turnTime={turnTime}
         teamsCount={teamsCount}
         teamNames={teamNames}
         teamScores={teamScores}
         colors={colors}
+        currentWord={currentWord}
+        currentPersona={currentPersona}
         words={words}
         wheelcss={wheelcss}
         setWheelCss={setWheelCss}
-        gameData={GameData[selectedTheme]}
-/>
+        gameData={GameData.franchises[selectedTheme]}
+        handleChange={handlePlayChange}
+        />;
       break;
   }
 
