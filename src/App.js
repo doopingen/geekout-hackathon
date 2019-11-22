@@ -9,6 +9,7 @@ import GamePane from './components/GamePane';
 import GameData from './data/data.json'
 
 const gameStates = GameData.gameStates;
+const languages = ['English', 'Klingon', 'Esperanto', 'Marain'];
 const themes = GameData.franchises.map((franchise) => {
   return franchise.name;
 })
@@ -20,8 +21,12 @@ function App() {
 
   const [gameState, setGameState] = useState(0);
   const [teams, setTeams] = useState([]);
+  const [teamsCount, setTeamsCount] = useState(2);
   const [theme, setTheme] = useState('');
-  const [sound, setSound] = useState(false);
+  const [soundEffects, setSoundEffects] = useState(false);
+  const [language, setLanguage] = useState('English');
+  const [timeLimit, setTimeLimit] = useState(60);
+  const [rounds, setRounds] = useState(5);
   const [teamName1, setTeamName1] = useState('')
   const [teamName2, setTeamName2] = useState('')
   const [teamName3, setTeamName3] = useState('')
@@ -84,6 +89,42 @@ function App() {
     console.log(index)
   }
 
+  const handleSettingsChange = (e) => {
+    console.log(`event: ${e.target.id}`);
+    switch (e.target.id) {
+      case "settingsSoundEffects":
+      case "soundValue":
+      case "soundCarat":
+        setSoundEffects(!soundEffects);
+        break;
+      case "settingsLanguage":
+      case "languageValue":
+      case "languageCarat":
+        console.log(`language ${e.target.value}`)
+        let index = languages.indexOf(language);
+        if (index > -1) {
+          index++;
+          if (index >= languages.length) {
+            index = 0;
+          }
+        } else {
+          index = 0;
+        }
+        console.log(`new language: ${languages[index]}`)
+        setLanguage(languages[index]);
+        break;
+      case "settingsTeamsCount":
+      case "teamsValue":
+      case "teamsCarat":
+        console.log(`teams count was ${teamsCount}`)
+        if (teamsCount === 3) {
+          setTeamsCount(1);
+        } else {
+          setTeamsCount(teamsCount + 1);
+        }
+    }
+  }
+
   switch (gameState) {
     case 0: // Home/Intro screen
       statePane = <HomePane
@@ -99,10 +140,13 @@ function App() {
       break;
     case 2: // Settings
       statePane = <SettingsPane
-                    handleSound={setSound}
-                    handleGameStateRules={handleGameStateRules}
-                    handleGameStateTheme={handleGameStateTheme}
-                     />
+                    soundEffects={soundEffects}
+                    language={language}
+                    teams={teamsCount}
+                    timeLimit={timeLimit}
+                    rounds={rounds}
+                    handleChange={handleSettingsChange}
+      />
       break;
     case 3: // Theme
         statePane = <ThemesPane
@@ -112,12 +156,6 @@ function App() {
                       handleGameStateTeams={handleGameStateTeams}
                       handleGameStatePrev={decGameState}
                       handleGameStateNext={incGameState} />
-      break;
-    case 3: // Settings
-      statePane = <SettingsPane
-                    handleSound={setSound}
-                    handleGameStatePrev={decGameState}
-                    handleGameStateNext={incGameState} />
       break;
     case 4: // Teams
         statePane = <TeamsPane

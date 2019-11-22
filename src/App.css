@@ -18,7 +18,6 @@ li {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: yellow;
 }
 
 @keyframes wheel-spin {
@@ -128,4 +127,26 @@ li {
   margin-left:10px;
   padding: 5px 10px 5px 10px;
   background:lightgrey
+}
+
+.settings-item {
+  margin: 20px 20px 0 20px;
+  border-bottom: 2px solid gray;
+}
+
+.settings-item-name {
+  text-align: left;
+}
+
+.settings-item-value {
+  float: right;
+  text-align: right;
+}
+
+.carat {
+  float: right;
+  color: lightgray;
+  font-size: 2em;
+  line-height: .5em;
+  margin: 0 0 0 10px;
 }
