@@ -164,7 +164,6 @@ li {
   margin: 0 0 0 10px;
 }
 
-<<<<<<< Updated upstream
 .theme-selection {
   padding: 20px;
   border: 2px solid black;
@@ -177,7 +176,6 @@ li {
   transform: scale(2);
   margin: 10px;
 }
-=======
 .spinstart {
   position: relative;
   top: 550px;
@@ -203,4 +201,3 @@ li {
   top: 500px;
   right: 50px;
 }
->>>>>>> Stashed changes
