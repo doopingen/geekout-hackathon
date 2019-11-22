@@ -13,10 +13,10 @@ const SettingsPane = props => {
                 <p id="settingsTimeLimit" className="settings-item settings-item-name" onClick={props.handleChange}>Time Limit Per Round <span className="settings-item-value">{props.timeLimit} sec<span className="carat">></span></span></p>
                 <p id="settingsRounds" className="settings-item settings-item-name" onClick={props.handleChange}>Rounds <span className="settings-item-value">{props.rounds}<span className="carat">></span></span></p>
             </div>
-            <div id="navPrev" className="pane-nav-prev" onClick={props.handleChange}>
+            <div id="navPrev" className="rules-setting-continue" onClick={props.handleChange}>
                 <p onClick={props.handleChange}>Rules</p>
             </div>
-            <div id="navNext" className="pane-nav-next" onClick={props.handleChange}>
+            <div id="navNext" className="rules-setting-continue" onClick={props.handleChange}>
                 <p onClick={props.handleChange}>Select Theme</p>
             </div>
         </div>

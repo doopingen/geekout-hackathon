@@ -19,10 +19,10 @@ const ThemesPane = props => {
                     </div>
                 )
             })}
-            <div id="navPrev" className="pane-nav-prev" onClick={props.handleChange}>
+            {/* <div id="navPrev" className="pane-nav-prev" onClick={props.handleChange}>
                 <p>Settings</p>
-            </div> 
-            <div id="navNext" className="pane-nav-next" onClick={props.handleChange}>
+            </div>  */}
+            <div id="navNext" className="theme-continue" onClick={props.handleChange}>
                 <p>Select Teams</p>
             </div>
         </div>
