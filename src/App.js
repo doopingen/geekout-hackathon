@@ -21,20 +21,14 @@ const wordData = GameData.gameWords
 function App() {
 
   const [gameState, setGameState] = useState(0);
-  const [teams, setTeams] = useState([]);
+  const [teamNames, setTeamNames] = useState(['','','']);
+  const [teamScores, setTeamScores] = useState([0,0,0]);
   const [teamsCount, setTeamsCount] = useState(2);
   const [selectedTheme, setSelectedTheme] = useState(0);
   const [soundEffects, setSoundEffects] = useState(false);
   const [language, setLanguage] = useState('English');
   const [timeLimit, setTimeLimit] = useState(60);
   const [rounds, setRounds] = useState(5);
-  const [teamName1, setTeamName1] = useState('')
-  const [teamName2, setTeamName2] = useState('')
-  const [teamName3, setTeamName3] = useState('')
-  const [team1Score, setTeam1Score] = useState(0)
-  const [team2Score, setTeam2Score] = useState(0)
-  const [team3Score, setTeam3Score] = useState(0)
-  const [trekData, setTrekData] = useState({trekTheme})
   const [words, setWords] = useState({wordData})
   const [colors, setColors] = useState()
   
@@ -164,6 +158,28 @@ function App() {
     }
   }
 
+  const handleTeamsChange = (e) => {
+    console.log(e.currentTarget.id);
+    console.log(e.target.id);
+    console.log(e.target.value);
+    switch (e.currentTarget.id) {
+      case 'navNext':
+        setGameState(5);
+        break;
+      case 'navPrev':
+        setGameState(3);
+        break;
+      case 'input1':
+      case 'input2':
+      case 'input3':
+        let t = [...teamNames];
+        let id = Number(e.currentTarget.id.substr(5, 1)) - 1;
+        t[id] = e.target.value;
+        setTeamNames(t);
+        break;        
+    }
+  }
+
   switch (gameState) {
     case 0: // Home/Intro screen
       statePane = <HomePane handleChange={handleHomeChange} />;
@@ -188,38 +204,20 @@ function App() {
                       handleChange={handleThemeChange} />
       break;
     case 4: // Teams
-        statePane = <TeamsPane
-                      setTeamName1={setTeamName1}
-                      setTeamName2={setTeamName2}
-                      setTeamName3={setTeamName3}
-                      teams={teams}
-                      setTeams={setTeams}
-                      handleTeamsUp={incTeams}
-                      handleTeamsDown={decTeams}
-                      handleGameStateTheme={handleGameStateTheme}
-                      handleGameStateStart={handleGameStateStart}
- />
+      statePane = <TeamsPane
+        teamsCount={teamsCount}
+        teams={teamNames}
+        handleChange={handleTeamsChange}
+      />
       break;
     case 5: // Game
         statePane = <GamePane
-        teamName1={teamName1}
-        teamName2={teamName2}
-        teamName3={teamName3}
-        setTeam1Score={setTeam1Score}
-        setTeam2Score={setTeam2Score}
-        setTeam3Score={setTeam3Score}
-        team1Score={team1Score}
-        team2Score={team2Score}
-        team3Score={team3Score}
+        teamsCount={teamsCount}
+        teamNames={teamNames}
+        teamScores={teamScores}
         colors={colors}
-        teams={teams}
         words={words}
-        trekData={trekData}
-        setTeams={setTeams}
-        handleTeamsUp={incTeams}
-        handleTeamsDown={decTeams}
-        handleGameStateTheme={handleGameStateTheme}
-        handleGameStateStart={handleGameStateStart}
+        gameData={GameData[selectedTheme]}
 />
       break;
   }
