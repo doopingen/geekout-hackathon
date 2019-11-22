@@ -150,3 +150,16 @@ li {
   line-height: .5em;
   margin: 0 0 0 10px;
 }
+
+.theme-selection {
+  padding: 20px;
+  border: 2px solid black;
+  background-color: lightgray;
+}
+
+.theme-input {
+  -ms-transform: scale(2); /* IE 9 */
+  -webkit-transform: scale(2); /* Chrome, Safari, Opera */
+  transform: scale(2);
+  margin: 10px;
+}
