@@ -21,7 +21,7 @@ const wordData = GameData.gameWords
 function App() {
 
   const [gameState, setGameState] = useState(0);
-  const [teamNames, setTeamNames] = useState(['','','']);
+  const [teamNames, setTeamNames] = useState(['Team 1','Team 2','Team 3']);
   const [teamScores, setTeamScores] = useState([0,0,0]);
   const [teamsCount, setTeamsCount] = useState(2);
   const [selectedTheme, setSelectedTheme] = useState(0);
@@ -218,12 +218,6 @@ function App() {
         teamScores={teamScores}
         colors={colors}
         words={words}
-        trekData={trekData}
-        setTeams={setTeams}
-        handleTeamsUp={incTeams}
-        handleTeamsDown={decTeams}
-        handleGameStateTheme={handleGameStateTheme}
-        handleGameStateStart={handleGameStateStart}
         wheelcss={wheelcss}
         setWheelCss={setWheelCss}
         gameData={GameData[selectedTheme]}
