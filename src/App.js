@@ -14,6 +14,7 @@ const themes = GameData.franchises.map((franchise) => {
   return franchise.name;
 })
 const trekTheme = GameData.franchises[0]
+const wordData = GameData.gameWords
 
 
 
@@ -34,6 +35,7 @@ function App() {
   const [team2Score, setTeam2Score] = useState(0)
   const [team3Score, setTeam3Score] = useState(0)
   const [trekData, setTrekData] = useState({trekTheme})
+  const [words, setWords] = useState({wordData})
   const [colors, setColors] = useState()
   
   let statePane = <></>;
@@ -183,6 +185,7 @@ function App() {
         team3Score={team3Score}
         colors={colors}
         teams={teams}
+        words={words}
         trekData={trekData}
         setTeams={setTeams}
         handleTeamsUp={incTeams}

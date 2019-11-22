@@ -9,7 +9,6 @@ const GameTimer = () => {
 
     useEffect(() => {
         setTimer()
-        // setTurnTimer( setInterval(turnTimer => turnTimer + 1, 1000) )
         const interval = setInterval(() => {
             setTurnTimer(turnTimer => turnTimer - 1);
           }, 1000);
