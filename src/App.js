@@ -31,6 +31,7 @@ function App() {
   const [rounds, setRounds] = useState(5);
   const [words, setWords] = useState({wordData})
   const [colors, setColors] = useState()
+  const [wheelcss, setWheelCss] = useState('wheel')
   
   let statePane = <></>;
 
@@ -217,6 +218,14 @@ function App() {
         teamScores={teamScores}
         colors={colors}
         words={words}
+        trekData={trekData}
+        setTeams={setTeams}
+        handleTeamsUp={incTeams}
+        handleTeamsDown={decTeams}
+        handleGameStateTheme={handleGameStateTheme}
+        handleGameStateStart={handleGameStateStart}
+        wheelcss={wheelcss}
+        setWheelCss={setWheelCss}
         gameData={GameData[selectedTheme]}
 />
       break;
