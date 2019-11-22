@@ -1,25 +1,35 @@
 import React, { useState, useEffect } from 'react';
+import { tsPropertySignature } from '@babel/types';
 
-const GameTimer = () => {
-    const [turnTimer, setTurnTimer] = useState(0);
+const GameTimer = (props) => {
 
-    const setTimer = () => {
-        setTurnTimer(60)
-    }
+    // useEffect(() => {
+    //     if (props.playState === 1) {
+    //       const interval = setInterval(() => {
+    //           console.log(`tick ${props.turnTime}`)
+    //         }, 1000);
+    //       // return () => {
+    //       //   clearInterval(interval);
+    //       // }
+    //     }
+    //   }, [props.playState]) 
 
-    useEffect(() => {
-        setTimer()
-        const interval = setInterval(() => {
-            setTurnTimer(turnTimer => turnTimer - 1);
-          }, 1000);
-        return () => {
-          clearInterval(interval)
-        }
-      }, []) 
+      let display = <></>;
+      console.log(`state: ${props.playState}`)
+      switch (props.playState) {
+        case 0:
+        case 2:
+          display = <div id="phase0" onClick={props.handleChange}>Start Timer</div>;
+          break;
+        case 1:
+          display = <div>{props.turnTime}</div>
+          break;
+      }
+
 
       return (
           <>
-            <p>{turnTimer}</p>
+            <p>{display}</p>
           </>
       )
 }

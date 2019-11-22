@@ -60,7 +60,7 @@ li {
   overflow: hidden;
 }
 
-.wheel-spin {
+.wheel-spin-slow {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -68,7 +68,7 @@ li {
   border-radius: 50%;
   animation-name: wheel-spin;
   animation-duration: 10s;
-  animation-iteration-count: 4;
+  animation-iteration-count: infinite;
   animation-timing-function: linear;
   overflow: hidden;
 }
