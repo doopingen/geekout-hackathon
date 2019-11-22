@@ -6,12 +6,12 @@ const SettingsPane = props => {
         <div className="settings">
             <h1>Settings</h1>
             <p>Sound</p>
-            <div className="pane-nav-prev" onClick={props.handleGameStatePrev}>
-                <p>Themes</p>
+            <div className="pane-nav-prev" onClick={props.handleGameStateRules}>
+                <p>Rules</p>
             </div>
  
-            <div className="pane-nav-next" onClick={props.handleGameStateNext}>
-                <p>Set up Teams</p>
+            <div className="pane-nav-next" onClick={props.handleGameStateTheme}>
+                <p>Select Theme</p>
             </div>
         </div>
     )
