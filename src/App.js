@@ -124,7 +124,37 @@ function App() {
         } else {
           setTeamsCount(teamsCount + 1);
         }
-    }
+        break;
+      case "settingsTimeLimit":
+      case "timeLimitValue":
+      case "timeLimitCarat":
+        switch (timeLimit) {
+          case 60:
+            setTimeLimit(90);
+            break;
+          case 90:
+            setTimeLimit(120);
+            break;
+          case 120:
+            setTimeLimit(60);
+            break;
+        }
+        break;
+        case "settingsRounds":
+            case "roundsValue":
+            case "roundsCarat":
+              switch (rounds) {
+                case 5:
+                  setRounds(10);
+                  break;
+                case 10:
+                  setRounds(15);
+                  break;
+                case 15:
+                  setRounds(5);
+                  break;
+              }
+              break;    }
   }
 
   switch (gameState) {
